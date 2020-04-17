@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 19:47:48 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/17 18:28:49 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/17 21:21:37 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_init_env(t_shell *shell, char **envp)
 	shell->env = NULL;
 	shell->env_std = NULL;
 	shell->env_count = 0;
+
+	shell->env_lst = (t_env_lst*)malloc(sizeof(t_env_lst));
 
 	int i = -1;
 	while (envp[++i])
@@ -85,11 +87,18 @@ void	ft_init_env(t_shell *shell, char **envp)
 		{
 			shell->path_env = shell->env;
 		}
+		if (envp[i][0] == 'H' && envp[i][1] == 'O' && envp[i][2] == 'M' && envp[i][3] == 'E')
+		{
+			shell->home_env = shell->env;
+		}
+
 		free(name);
 	}
 
 	shell->env = env_head;
 	shell->env_std = env_std_head;
+	shell->env_lst->env = env_head;
+	shell->env_lst->env_std = env_std_head;
 }
 
 char	*ft_get_env_content(t_env *env_head, char *name)

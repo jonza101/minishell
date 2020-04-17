@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 18:15:21 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/17 18:23:47 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/17 21:26:34 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,18 @@ typedef	struct		s_env
 	struct s_env	*next;
 }					t_env;
 
+typedef	struct		s_env_lst
+{
+	t_env			*env;
+	t_env			*env_std;
+}					t_env_lst;
+
 typedef	struct		s_builtin
 {
-	int				(*func)(char **args, int argc, t_env *env, t_env *env_std);
+	int				(*func)(char **args, int argc, t_env_lst *env_lst, t_env *inc_env);
 	char			*name;
+
+	t_env			*env;
 }					t_builtin;
 
 typedef	struct		s_shell
@@ -50,7 +58,10 @@ typedef	struct		s_shell
 	char			**args;
 	int 			argc;
 
+	t_env_lst		*env_lst;
+
 	t_env			*path_env;
+	t_env			*home_env;
 
 	t_env			*env;
 	t_env			*env_std;
@@ -68,12 +79,12 @@ char				**ft_strsplit_echo(char const *str);
 char				**ft_strsplit_echo_whitespaces(char const *str);
 void				ft_strsplit_free(char **split);
 
-int 				ft_cd(char **args, int argc, t_env *env, t_env *env_std);
-int					ft_exit(char **args, int argc, t_env *env, t_env *env_std);
-int					ft_echo(char **args, int argc, t_env *env, t_env *env_std);
-int					ft_env(char **args, int argc, t_env *env, t_env *env_std);
-int					ft_setenv(char **args, int argc, t_env *env, t_env *env_std);
-int					ft_unsetenv(char **args, int argc, t_env *env, t_env *env_std);
+int 				ft_cd(char **args, int argc, t_env_lst * env_lst, t_env *inc_env);
+int					ft_exit(char **args, int argc, t_env_lst * env_lst, t_env *inc_env);
+int					ft_echo(char **args, int argc, t_env_lst * env_lst, t_env *inc_env);
+int					ft_env(char **args, int argc, t_env_lst * env_lst, t_env *inc_env);
+int					ft_setenv(char **args, int argc, t_env_lst * env_lst, t_env *inc_env);
+int					ft_unsetenv(char **args, int argc, t_env_lst * env_lst, t_env *inc_env);
 
 void				ft_init_env(t_shell *shell, char **envp);
 char				*ft_get_env_content(t_env *env_head, char *name);

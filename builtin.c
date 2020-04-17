@@ -6,29 +6,31 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 18:04:01 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/17 18:28:51 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/17 21:33:49 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
 
-int		ft_cd(char **args, int argc, t_env *env, t_env *env_std)
+int		ft_cd(char **args, int argc, t_env_lst * env_lst, t_env *inc_env)
 {
 	if (argc == 1)
 	{
-		struct passwd *pwd;
-		pwd = getpwuid(getuid());
-		if (chdir(pwd->pw_dir) == -1)
-			printf("cd error\n");
+		if (chdir(inc_env->content) == -1)
+		{
+			char *error_s = ft_strjoin("bash: cd: ", inc_env->content);
+			char *error = ft_strjoin(error_s, " no such file or directory\n");
+			_ft_putstr(error);
+			free(error_s);
+			free(error);
+		}
 	}
 	else if (argc == 2)
 	{
 		if (args[1][0] == '~')
 		{
-			struct passwd *pwd;
-			pwd = getpwuid(getuid());
-			char *path = ft_strjoin(pwd->pw_dir, &args[1][1]);
+			char *path = ft_strjoin(inc_env->content, &args[1][1]);
 			if (chdir(path) == -1)
 			{
 				char *error_s = ft_strjoin("bash: cd: ", path);
@@ -57,13 +59,13 @@ int		ft_cd(char **args, int argc, t_env *env, t_env *env_std)
 	return (1);
 }
 
-int		ft_exit(char **args, int argc, t_env *env, t_env *env_std)
+int		ft_exit(char **args, int argc, t_env_lst * env_lst, t_env *inc_env)
 {
 	exit(1);
 	return (1);
 }
 
-int		ft_echo(char **args, int argc, t_env *env, t_env *env_std)
+int		ft_echo(char **args, int argc, t_env_lst * env_lst, t_env *inc_env)
 {
 	int i = 0;
 	while (++i < argc)
@@ -71,7 +73,7 @@ int		ft_echo(char **args, int argc, t_env *env, t_env *env_std)
 		char *entr = ft_strchr(args[i], '$');
 		if (entr)
 		{
-			char *temp = ft_get_env_content(env, (entr + 1));
+			char *temp = ft_get_env_content(env_lst->env, (entr + 1));
 			free(args[i]);
 			args[i] = ft_strdup(temp);
 			return (0);
@@ -80,9 +82,9 @@ int		ft_echo(char **args, int argc, t_env *env, t_env *env_std)
 	return (0);
 }
 
-int		ft_env(char **args, int argc, t_env *env, t_env *env_std)
+int		ft_env(char **args, int argc, t_env_lst * env_lst, t_env *inc_env)
 {
-	t_env *e = env;
+	t_env *e = env_lst->env;
 	while (e)
 	{
 		char *env_s = ft_strjoin(e->name, "=");
@@ -96,7 +98,7 @@ int		ft_env(char **args, int argc, t_env *env, t_env *env_std)
 	return (1);
 }
 
-int		ft_setenv(char **args, int argc, t_env *env, t_env *env_std)
+int		ft_setenv(char **args, int argc, t_env_lst * env_lst, t_env *inc_env)
 {
 	if (argc != 3)
 	{
@@ -104,7 +106,7 @@ int		ft_setenv(char **args, int argc, t_env *env, t_env *env_std)
 		return (1);
 	}
 
-	t_env *e = env;
+	t_env *e = env_lst->env;
 	while (e)
 	{
 		if (!ft_strcmp(args[1], e->name))
@@ -127,7 +129,7 @@ int		ft_setenv(char **args, int argc, t_env *env, t_env *env_std)
 	return (1);
 }
 
-int		ft_unsetenv(char **args, int argc, t_env *env, t_env *env_std)
+int		ft_unsetenv(char **args, int argc, t_env_lst * env_lst, t_env *inc_env)
 {
 	if (argc != 2)
 	{
@@ -135,8 +137,8 @@ int		ft_unsetenv(char **args, int argc, t_env *env, t_env *env_std)
 		return (1);
 	}
 
-	t_env *e = env;
-	t_env *e_std = env_std;
+	t_env *e = env_lst->env;
+	t_env *e_std = env_lst->env_std;
 	while (e)
 	{
 		if (!ft_strcmp(args[1], e->name))

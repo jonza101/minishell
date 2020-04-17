@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 18:15:06 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/17 18:24:13 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/17 21:30:30 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_execute_process(t_shell *shell, char **envp)
 	{
 		if (!ft_strcmp(shell->args[0], shell->builtin[i].name))
 		{
-			int code = shell->builtin[i].func(shell->args, shell->argc, shell->env, shell->env_std);
-			if (code)
+			int stat = shell->builtin[i].func(shell->args, shell->argc, shell->env_lst, shell->builtin[i].env);
+			if (stat)
 				return;
 		}
 	}
@@ -174,14 +174,21 @@ void	ft_init_builtins(t_shell *shell)
 	shell->builtin[3].name = "env";
 	shell->builtin[4].name = "setenv";
 	shell->builtin[5].name = "unsetenv";
+
+	shell->builtin[0].env = shell->home_env;
+	shell->builtin[1].env = NULL;
+	shell->builtin[2].env = NULL;
+	shell->builtin[3].env = NULL;
+	shell->builtin[4].env = NULL;
+	shell->builtin[5].env = NULL;
 }
 
 int		main(int argc, char **argv, char **envp)
 {
 	t_shell *shell = (t_shell*)malloc(sizeof(t_shell));
-	ft_init_builtins(shell);
 
 	ft_init_env(shell, envp);
+	ft_init_builtins(shell);
 
 	while (1)
 	{
