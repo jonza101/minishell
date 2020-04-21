@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 23:27:08 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/15 21:32:37 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/21 18:21:34 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int 	ft_word_count(char const *s, int *i, int *id)
 	words = 0;
 	*i = 0;
 	*id = 0;
-	while (s[*i] && (s[*i] == ' ' || s[*i] == '\n' || s[*i] == '\t' || s[*i] == '\v' || s[*i] == '\f' || s[*i] == '\r'))
+	while (s[*i] && (s[*i] == ' ' || s[*i] == '\n' || s[*i] == '\t' || s[*i] == '\v' || s[*i] == '\f' || s[*i] == '\r' || s[*i] == '\b' || s[*i] == '\a'))
 		*i += 1;
 	while (s[j])
 	{
-		if ((s[j] != ' ' || s[j] != '\n' || s[j] != '\t' || s[j] != '\v' || s[j] != '\f' || s[j] != '\r')
-				&& ((s[j + 1] == ' ' || s[j + 1] == '\n' || s[j + 1] == '\t' || s[j + 1] == '\v' || s[j + 1] == '\f' || s[j + 1] == '\r')
+		if ((s[j] != ' ' || s[j] != '\n' || s[j] != '\t' || s[j] != '\v' || s[j] != '\f' || s[j] != '\r' || s[j] != '\b' || s[j] != '\a')
+				&& ((s[j + 1] == ' ' || s[j + 1] == '\n' || s[j + 1] == '\t' || s[j + 1] == '\v' || s[j + 1] == '\f' || s[j + 1] == '\r' || s[j + 1] == '\b' || s[j + 1] == '\a')
 					|| !s[j + 1]))
 			words++;
 		j++;
@@ -40,7 +40,7 @@ int 	ft_sl(char *str)
 	int len;
 
 	len = 0;
-	while (str[len] && (str[len] != ' ' || str[len] == '\n' || str[len] == '\t' || str[len] == '\v' || str[len] == '\f' || str[len] == '\r'))
+	while (str[len] && (str[len] != ' ' || str[len] == '\n' || str[len] == '\t' || str[len] == '\v' || str[len] == '\f' || str[len] == '\r' || str[len] == '\b' || str[len] == '\a'))
 		len++;
 	return (len);
 }
@@ -81,12 +81,12 @@ char	**ft_strsplit_whitespaces(char const *s)
 	l = i;
 	while (s[i++])
 	{
-		if ((s[i] == ' ' || s[i] == '\n' || s[i] == '\t' || s[i] == '\v' || s[i] == '\f' || s[i] == '\r') || !s[i])
+		if ((s[i] == ' ' || s[i] == '\n' || s[i] == '\t' || s[i] == '\v' || s[i] == '\f' || s[i] == '\r' || s[i] == '\b' || s[i] == '\a') || !s[i])
 		{
 			if (!(ar[id] = (char *)malloc(ft_sl((char *)&s[l]) + 1)))
 				return (ft_free(ar, id));
 			ft_word_input((char *)s, l, i, ar[id++]);
-			while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t' || s[i] == '\v' || s[i] == '\f' || s[i] == '\r')
+			while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t' || s[i] == '\v' || s[i] == '\f' || s[i] == '\r' || s[i] == '\b' || s[i] == '\a')
 				i++;
 			l = i;
 		}

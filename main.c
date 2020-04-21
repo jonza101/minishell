@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 18:15:06 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/17 21:30:30 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/21 17:15:28 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,63 +75,6 @@ void	ft_execute_process(t_shell *shell, char **envp)
 		}
 	}
 }
-
-
-// char	*ft_line(char *line)
-// {
-// 	int len = 0;
-// 	while (line[len])
-// 		len++;
-
-// 	char *str = ft_strnew(len);
-
-// 	int j = 0;
-// 	int i = 0;
-// 	while (i < len)
-// 	{
-// 		if (line[i + 1] && line[i] == '\\')
-// 		{
-// 			if (line[i + 1] == 'n')
-// 			{
-// 				str[i - j] = '\n';
-// 				i += 1;
-// 				j++;
-// 			}
-// 			else if (line[i + 1] == 't')
-// 			{
-// 				str[i - j] = '\t';
-// 				i += 1;
-// 				j++;
-// 			}
-// 			else if (line[i + 1] == 'v')
-// 			{
-// 				str[i - j] = '\v';
-// 				i += 1;
-// 				j++;
-// 			}
-// 			else if (line[i + 1] == 'f')
-// 			{
-// 				str[i - j] = '\f';
-// 				i += 1;
-// 				j++;
-// 			}
-// 			else if (line[i + 1] == 'r')
-// 			{
-// 				str[i - j] = '\r';
-// 				i += 1;
-// 				j++;
-// 			}
-// 		}
-// 		else
-// 		{
-// 			str[i - j] = line[i];
-// 		}
-// 		i++;
-// 	}
-// 	free(line);
-// 	printf("%s\n", str);
-// 	return (str);
-// }
 
 char 	*ft_readline()
 {
