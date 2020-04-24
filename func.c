@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 23:19:54 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/15 21:51:31 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/24 15:19:40 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,29 @@ void	_ft_putstr_endc(const char *str, char c)
 		len++;
 	write(1, str, len);
 	write(1, &c, 1);
+}
+
+char	*_ft_strstr(const char *str1, const char *str2)
+{
+	int i;
+	int j;
+
+	i = 0;
+	if (!str2[0])
+		return ((char*)str1);
+	while (str1[i])
+	{
+		j = 0;
+		if (str1[i] == str2[j])
+		{
+			while (str1[i + j] && (str1[i + j] == str2[j]))
+			{
+				if (!str2[j + 1])
+					return ((char*)&str1[i + j + 1]);
+				j++;
+			}
+		}
+		i++;
+	}
+	return (NULL);
 }

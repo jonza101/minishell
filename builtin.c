@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 18:04:01 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/21 20:39:36 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/24 15:44:43 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ char	*ft_echo_line(char *line)
 		i++;
 	}
 	free(line);
-	//printf("%s\n", str);
 	return (str);
 }
 

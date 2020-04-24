@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 18:15:21 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/19 18:36:45 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/24 18:49:45 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,21 @@
 
 
 #define READ_BUFF_SIZE 256
+#define MAX_DIR 256
+
+#define UP_ARROW "^[[A"
+
 
 #define BUILTIN 6
+
+
+#define COLOR_WHITE "\x1b[0m"
+#define COLOR_BLUE "\x1b[1;34m"
+#define COLOR_YELLOW "\x1b[01;33m"
+#define COLOR_GREEN "\x1b[1;32m"
+#define COLOR_RED "\x1b[1;31m"
+#define COLOR_MAGENTA "\x1b[1;35m"
+#define COLOR_CYAN "\x1b[1;36m"
 
 
 typedef	struct		s_env
@@ -62,6 +75,10 @@ typedef	struct		s_shell
 
 	t_env			*path_env;
 	t_env			*home_env;
+	t_env			*pwd_env;
+	t_env			*user_env;
+
+	char 			*promt_pwd;
 
 	t_env			*env;
 	t_env			*env_std;
@@ -73,6 +90,7 @@ typedef	struct		s_shell
 void				*ft_realloc(void *ptr, size_t size);
 void				_ft_putstr(const char *str);
 void				_ft_putstr_endc(const char *str, char c);
+char				*_ft_strstr(const char *str1, const char *str2);
 
 char 				**ft_strsplit_whitespaces(char const *s);
 char				**ft_strsplit_echo(char const *str);

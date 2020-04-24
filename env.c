@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 19:47:48 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/17 21:21:37 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/24 15:45:59 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 void	ft_init_env(t_shell *shell, char **envp)
 {
+	shell->path_env = NULL;
+	shell->home_env = NULL;
+	shell->pwd_env = NULL;
+
 	t_env *env_head = NULL;
 	t_env *env_std_head = NULL;
 	shell->env = NULL;
@@ -84,13 +88,16 @@ void	ft_init_env(t_shell *shell, char **envp)
 		shell->env_count++;
 
 		if (envp[i][0] == 'P' && envp[i][1] == 'A' && envp[i][2] == 'T' && envp[i][3] == 'H')
-		{
 			shell->path_env = shell->env;
-		}
-		if (envp[i][0] == 'H' && envp[i][1] == 'O' && envp[i][2] == 'M' && envp[i][3] == 'E')
-		{
+		else if (envp[i][0] == 'H' && envp[i][1] == 'O' && envp[i][2] == 'M' && envp[i][3] == 'E')
 			shell->home_env = shell->env;
+		else if (envp[i][0] == 'P' && envp[i][1] == 'W' && envp[i][2] == 'D')
+		{
+			shell->pwd_env = shell->env;
+			shell->promt_pwd = ft_strdup(shell->env->content);
 		}
+		else if (envp[i][0] == 'U' && envp[i][1] == 'S' && envp[i][2] == 'E' && envp[i][3] == 'R')
+			shell->user_env = shell->env;
 
 		free(name);
 	}
