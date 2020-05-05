@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 18:15:21 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/24 18:49:45 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/04/24 20:03:12 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@
 
 #define READ_BUFF_SIZE 256
 #define MAX_DIR 256
-
-#define UP_ARROW "^[[A"
-
 
 #define BUILTIN 6
 

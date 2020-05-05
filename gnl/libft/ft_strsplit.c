@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:59:50 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2018/12/02 19:09:32 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:20:40 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ char			**ft_strsplit(char const *s, char c)
 
 	if (!s || !c)
 		return (NULL);
-	if (!(ar = (char**)malloc(sizeof(char*) *
-		ft_word_count((char*)s, c, &i, &id) + 1)))
+	if (!(ar = (char**)malloc(sizeof(char*) * (ft_word_count((char*)s, c, &i, &id) + 1))))
 		return (NULL);
 	l = i;
 	while (s[i++])

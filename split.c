@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 23:27:08 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/21 18:21:34 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:23:22 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void	ft_strsplit_free(char **split)
 	int i = -1;
 	while (split[++i])
 		free(split[i]);
-	free(split[i]);
+	free(split);
 }
