@@ -6,7 +6,7 @@
 /*   By: zjeyne-l <zjeyne-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 18:04:01 by zjeyne-l          #+#    #+#             */
-/*   Updated: 2020/04/24 15:44:43 by zjeyne-l         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:43:02 by zjeyne-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,7 @@ int		ft_echo(char **args, int argc, t_env_lst *env_lst, t_env *inc_env)
 			ft_strsplit_free(split_ws);
 		}
 		ft_strsplit_free(split_d);
+		free(line);
 
 		ft_putstr(str);
 		free(str);
